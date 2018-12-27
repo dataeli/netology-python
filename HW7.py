@@ -44,7 +44,7 @@ sql_str = (
         """
             SELECT * INTO movies_top 
             FROM (SELECT movieId, COUNT(rating) as ratings_num, AVG(rating) as ratings_avg
-            FROM ratings HAVING AVG(rating) > 3);           
+            FROM ratings HAVING AVG(rating) > 3)           
         """
 )
 # -------------
@@ -136,7 +136,7 @@ tags_df = pd.DataFrame(id_tags, columns=['movieid', 'tags'])
 # для каждого тега вычислите, в каком количестве фильмов он встречается
 # оставьте top-5 самых популярных тегов
 
-top_5_tags = tags_df.groupby('tags').agg({'tags' : 'count'}).sort_values(by='tags', ascending = False).head(5)
+top_5_tags = tags_df.groupby('tags').agg({'tags' : 'count'}).sort_values(by='count', ascending = False).head(5)
 
 print(top_5_tags)
 
